@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  background: linear-gradient(to bottom, #33a3aa, #138188);
+
+  height: 100%;
+}
+
+.message {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.login {
+  background-color: white;
+  width: 40%;
+  border-top-left-radius: 3%;
+  border-bottom-left-radius: 3%;
+}

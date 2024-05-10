@@ -1,0 +1,30 @@
+ul {
+  list-style: none;
+}
+
+.mensaje {
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.messageP {
+  font-size: small;
+}
+
+.listMTitle {
+  font-weight: 700;
+}
+
+.listMDesc {
+  font-weight: 300;
+  font-size: small;
+}
