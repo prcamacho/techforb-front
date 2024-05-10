@@ -1,1 +1,26 @@
-<p>register-page works!</p>
+<h1>Portal de monitoreo</h1>
+<h4>Registrarse</h4>
+<div>
+  <form class="form" [formGroup]="regForm">
+    <p>
+      <p-floatLabel>
+        <input pInputText id="email" formControlName="email" />
+        <label for="email">Email</label>
+      </p-floatLabel>
+    </p>
+    <p>
+      <p-floatLabel>
+        <input
+          type="password"
+          pInputText
+          id="password"
+          formControlName="password"
+        />
+        <label for="password">Contraseña</label>
+      </p-floatLabel>
+    </p>
+    <div>
+      <button [disabled]="regForm.invalid" type="submit">Registrarse</button>
+    </div>
+  </form>
+</div>

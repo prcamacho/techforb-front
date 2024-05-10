@@ -1,1 +1,39 @@
-<p>login-page works!</p>
+<h1>Portal de monitoreo</h1>
+<h4>Iniciar sesión</h4>
+<div>
+  <form
+    class="form"
+    [formGroup]="logForm"
+    (ngSubmit)="login()"
+    autocomplete="off"
+  >
+    <p>
+      <p-floatLabel>
+        <input pInputText id="email" formControlName="email" />
+        <label for="email">Email</label>
+      </p-floatLabel>
+    </p>
+    <p>
+      <p-floatLabel>
+        <input
+          type="password"
+          pInputText
+          id="password"
+          formControlName="password"
+        />
+        <label for="password">Contraseña</label>
+      </p-floatLabel>
+    </p>
+    <div>
+      <p>¿Olvidaste tu contraseña?</p>
+      <button [disabled]="logForm.invalid" type="submit">Iniciar sesión</button>
+    </div>
+  </form>
+</div>
+
+<div>
+  <p>
+    Protegido por reCAPTCHA y sujeto a la
+    <a href="">Política de Privacidad</a> y <a href="">Condiciones</a>.
+  </p>
+</div>
