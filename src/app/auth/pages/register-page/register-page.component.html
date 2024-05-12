@@ -1,26 +1,38 @@
 <h1>Portal de monitoreo</h1>
 <h4>Registrarse</h4>
 <div>
-  <form class="form" [formGroup]="regForm">
-    <p>
-      <p-floatLabel>
-        <input pInputText id="email" formControlName="email" />
-        <label for="email">Email</label>
-      </p-floatLabel>
-    </p>
-    <p>
-      <p-floatLabel>
-        <input
-          type="password"
-          pInputText
-          id="password"
-          formControlName="password"
-        />
-        <label for="password">Contraseña</label>
-      </p-floatLabel>
-    </p>
+  <form
+    class="form"
+    [formGroup]="regForm"
+    (ngSubmit)="register()"
+    autocomplete="off"
+  >
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Ingresa tu correo electronico"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input
+        type="password"
+        matInput
+        id="password"
+        formControlName="password"
+      />
+      <mat-label for="password">Contraseña</mat-label>
+    </mat-form-field>
     <div>
-      <button [disabled]="regForm.invalid" type="submit">Registrarse</button>
+      <button
+        mat-flat-button
+        [disabled]="regForm.invalid"
+        type="submit"
+        class="button-acept"
+      >
+        Registrarse
+      </button>
     </div>
   </form>
 </div>

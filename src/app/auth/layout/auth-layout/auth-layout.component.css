@@ -2,7 +2,7 @@
   display: flex;
   background: linear-gradient(to bottom, #33a3aa, #138188);
 
-  height: 100%;
+  min-height: 100dvh;
 }
 
 .message {
@@ -35,11 +35,3 @@
     border-bottom-left-radius: 0%;
   }
 }
-
-/* @media (min-width: 601px) {
-  .layout-component,
-  .message-component,
-  .login-component {
-    display: block;
-  }
-} */

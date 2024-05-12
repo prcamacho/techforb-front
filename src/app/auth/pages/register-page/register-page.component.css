@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1,
+h4 {
+  padding-bottom: 20px;
+}
+
+.mat-form-field {
+  padding-bottom: 20px;
+}
+
+.form,
+h1,
+h4,
+div {
+  width: 80%;
+  margin: auto;
+}
+
+.form > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    padding-top: 25%;
+  }
+  .form {
+    justify-content: space-between;
+  }
+
+  .button-acept {
+    margin-top: 50%;
+    margin-inline: inherit;
+  }
+
+  p {
+    display: none;
+  }
+}

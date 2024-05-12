@@ -11,6 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-login-page',
@@ -27,6 +28,7 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './login-page.component.css',
 })
 export class LoginPageComponent {
+  private authService = inject(AuthService);
   logForm: FormGroup;
 
   constructor() {
@@ -40,6 +42,9 @@ export class LoginPageComponent {
   }
 
   login() {
-    console.log(this.logForm.value);
+    const { email, password } = this.logForm.value;
+    this.authService.login(email, password).subscribe((success) => {
+      console.log(success);
+    });
   }
 }
