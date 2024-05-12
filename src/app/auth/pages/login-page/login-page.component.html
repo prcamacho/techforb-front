@@ -7,33 +7,40 @@
     (ngSubmit)="login()"
     autocomplete="off"
   >
-    <p>
-      <p-floatLabel>
-        <input pInputText id="email" formControlName="email" />
-        <label for="email">Email</label>
-      </p-floatLabel>
-    </p>
-    <p>
-      <p-floatLabel>
-        <input
-          type="password"
-          pInputText
-          id="password"
-          formControlName="password"
-        />
-        <label for="password">Contraseña</label>
-      </p-floatLabel>
-    </p>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Ingresa tu correo electronico"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input
+        type="password"
+        matInput
+        id="password"
+        formControlName="password"
+      />
+      <mat-label for="password">Contraseña</mat-label>
+    </mat-form-field>
     <div>
       <p>¿Olvidaste tu contraseña?</p>
-      <button [disabled]="logForm.invalid" type="submit">Iniciar sesión</button>
+      <button
+        mat-flat-button
+        [disabled]="logForm.invalid"
+        type="submit"
+        class="button-acept"
+      >
+        Iniciar sesión
+      </button>
     </div>
   </form>
-</div>
 
-<div>
-  <p>
-    Protegido por reCAPTCHA y sujeto a la
-    <a href="">Política de Privacidad</a> y <a href="">Condiciones</a>.
-  </p>
+  <div>
+    <p>
+      Protegido por reCAPTCHA y sujeto a la
+      <a href="">Política de Privacidad</a> y <a href="">Condiciones</a>.
+    </p>
+  </div>
 </div>
