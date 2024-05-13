@@ -13,6 +13,7 @@ import { PopupNewPlantComponent } from '../popup-new-plant/popup-new-plant.compo
 import { MatButtonModule } from '@angular/material/button';
 import { PopupEditPlantComponent } from '../popup-edit-plant/popup-edit-plant.component';
 import { SeverityLecturesComponent } from '../../components/severity-lectures/severity-lectures.component';
+import { SeveriyByTypeLectureComponent } from '../../components/severiy-by-type-lecture/severiy-by-type-lecture.component';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -27,7 +28,8 @@ import { SeverityLecturesComponent } from '../../components/severity-lectures/se
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    SeverityLecturesComponent
+    SeverityLecturesComponent,
+    SeveriyByTypeLectureComponent
   ],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.css',
