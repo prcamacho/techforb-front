@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth-service.service';
 import { CommonModule } from '@angular/common';
 
@@ -12,9 +12,11 @@ import { CommonModule } from '@angular/common';
 })
 export class DashboardLayoutComponent {
   private authService = inject(AuthService);
+  private router = inject(Router);
   public user = computed(() => this.authService.currentUser());
 
   onLogout() {
     this.authService.logout();
+    this.router.navigateByUrl('/auth/login');
   }
 }

@@ -56,6 +56,23 @@ export class AuthService {
     );
   }
 
+  register(email: string, password: string): Observable<boolean> {
+    const url = `${this.baseUrl}/register`;
+    const body = { email, password };
+
+    return this.http.post<LoginResponse>(url, body).pipe(
+      map(({ user, token }) => {
+        this._currentUser.set(user);
+        this._authStatus.set(AuthStatus.notAuthenticated);
+        if (typeof window !== 'undefined') {
+          window.sessionStorage.setItem('token', token);
+        }
+        return true;
+      }),
+      catchError((err) => throwError(() => err.error.message))
+    );
+  }
+
   checkAuthStatus(): Observable<boolean> {
     const url = `${this.baseUrl}/auth/check-token`;
     if (typeof window !== 'undefined') {
