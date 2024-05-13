@@ -1,5 +1,5 @@
 export interface SeveritiesByTypeResponse {
-  ok: number;
-  media:number;
-  roja: number;
+  ok?: number;
+  media?:number;
+  roja?: number;
 }
