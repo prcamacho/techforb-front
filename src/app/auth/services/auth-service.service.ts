@@ -4,7 +4,6 @@ import { environment } from '../../environments/environments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { AuthStatus, CheckTokenResponse, LoginResponse } from '../interfaces';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
-  private cookieService = inject(CookieService);
+
+  private token: string | null = null;
 
   //Manejare un objeto como un usuario o un null
   private _currentUser = signal<User | null>(null);
@@ -40,9 +40,9 @@ export class AuthService {
   private setAuthentication(user: User, token: string): boolean {
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
-    this.cookieService.set('token', token);
-    console.log('Asigna el valor de authenticated');
-
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('token', token);
+    }
     return true;
   }
 
@@ -58,14 +58,19 @@ export class AuthService {
 
   checkAuthStatus(): Observable<boolean> {
     const url = `${this.baseUrl}/auth/check-token`;
-    const token = this.cookieService.get('token');
+    if (typeof window !== 'undefined') {
+      this.token = window.sessionStorage.getItem('token');
+    }
 
-    if (!token) {
+    if (!this.token) {
       this.logout();
       return of(false);
     }
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${this.token}`
+    );
 
     return this.http.get<CheckTokenResponse>(url, { headers }).pipe(
       map(({ user, token }) => this.setAuthentication(user, token)),
@@ -77,8 +82,10 @@ export class AuthService {
   }
 
   logout() {
-    this.cookieService.delete('token');
-    this._currentUser.set(null);
-    this._authStatus.set(AuthStatus.notAuthenticated);
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.removeItem('token');
+      this._currentUser.set(null);
+      this._authStatus.set(AuthStatus.notAuthenticated);
+    }
   }
 }
