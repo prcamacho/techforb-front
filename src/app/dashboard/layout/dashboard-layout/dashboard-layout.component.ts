@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { PopupEditPlantComponent } from '../popup-edit-plant/popup-edit-plant.component';
 import { SeverityLecturesComponent } from '../../components/severity-lectures/severity-lectures.component';
 import { SeveriyByTypeLectureComponent } from '../../components/severiy-by-type-lecture/severiy-by-type-lecture.component';
+import { SeverityByPclantComponent } from '../../components/severity-by-plant/severity-by-plant.component';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -29,15 +30,14 @@ import { SeveriyByTypeLectureComponent } from '../../components/severiy-by-type-
     MatIconModule,
     MatButtonModule,
     SeverityLecturesComponent,
-    SeveriyByTypeLectureComponent
+    SeveriyByTypeLectureComponent,
+    SeverityByPclantComponent
   ],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.css',
 })
 export class DashboardLayoutComponent {
-  private authService = inject(AuthService);
-  private router = inject(Router);
-  public user = computed(() => this.authService.currentUser());
+
 
   constructor(private dialog: MatDialog) {}
 
@@ -66,8 +66,5 @@ export class DashboardLayoutComponent {
     });
   }
 
-  onLogout() {
-    this.authService.logout();
-    this.router.navigateByUrl('/auth/login');
-  }
+
 }
