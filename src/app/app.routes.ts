@@ -40,4 +40,14 @@ export const routes: Routes = [
         './dashboard/layout/dashboard-layout/dashboard-layout.component'
       ).then((c) => c.DashboardLayoutComponent),
   },
+  {
+    path: '',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
+  },
 ];
