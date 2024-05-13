@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupNewPlantComponent } from '../popup-new-plant/popup-new-plant.component';
 import { MatButtonModule } from '@angular/material/button';
 import { PopupEditPlantComponent } from '../popup-edit-plant/popup-edit-plant.component';
+import { SeverityLecturesComponent } from '../../components/severity-lectures/severity-lectures.component';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -26,6 +27,7 @@ import { PopupEditPlantComponent } from '../popup-edit-plant/popup-edit-plant.co
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
+    SeverityLecturesComponent
   ],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.css',

@@ -1,0 +1,41 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  height: 15%;
+}
+
+h3 {
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+.flex-item {
+  flex: 1;
+}
+
+.card-container {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.card-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+}
+
+.image-card {
+  width: 50px;
+  height: 50px;
+}

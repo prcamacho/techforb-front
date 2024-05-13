@@ -7,10 +7,10 @@ import { SeveritiesByTypeResponse } from '../interfaces/severities-by-type-respo
 import { NewPlantResponse } from '../interfaces/new-plant-response.interface';
 import { AddAlerts } from '../interfaces/addAlerts.interface';
 import { AddAlertsResponse } from '../interfaces/addAlerts-response.interface';
-import { TypesBySeverity } from '../interfaces/types-by-severity-response.interface';
 import { NewPlant } from '../interfaces/newPlant.interface';
 import { AllAlertsResponse } from '../interfaces/allAlerts-response.interface';
 import { error } from 'console';
+import { CountBySeverity } from '../interfaces/count-by-severity-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -36,8 +36,8 @@ export class PlantServiceService {
       alertsToAdd
     );
   }
-  getTypesBySeverity(id: string): Observable<TypesBySeverity> {
-    return this.http.get<TypesBySeverity>(
+  getCountBySeverity(id: string): Observable<CountBySeverity> {
+    return this.http.get<CountBySeverity>(
       `${this.baseUrl}/alerts/severity/${id}`
     );
   }
