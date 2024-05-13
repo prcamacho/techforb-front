@@ -1,3 +1,4 @@
+import { DashboardMainPageComponent } from './dashboard/pages/dashboard-main-page/dashboard-main-page.component';
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './auth/layout/auth-layout/auth-layout.component';
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
@@ -37,8 +38,8 @@ export const routes: Routes = [
     canActivate: [isAuthenticatedGuard],
     loadComponent: () =>
       import(
-        './dashboard/layout/dashboard-layout/dashboard-layout.component'
-      ).then((c) => c.DashboardLayoutComponent),
+        './dashboard/pages/dashboard-main-page/dashboard-main-page.component'
+      ).then((c) => c.DashboardMainPageComponent),
   },
   {
     path: '',
