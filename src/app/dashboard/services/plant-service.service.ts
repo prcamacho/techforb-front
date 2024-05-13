@@ -1,14 +1,16 @@
+import { DeleteResponse } from './../interfaces/delete-response.interface';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environments';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { SeveritiesByTypeResponse } from '../interfaces/severities-by-type-response.interface';
-import {
-  NewPlant,
-  NewPlantResponse,
-} from '../interfaces/new-plant-response.interface';
+import { NewPlantResponse } from '../interfaces/new-plant-response.interface';
 import { AddAlerts } from '../interfaces/addAlerts.interface';
 import { AddAlertsResponse } from '../interfaces/addAlerts-response.interface';
+import { TypesBySeverity } from '../interfaces/types-by-severity-response.interface';
+import { NewPlant } from '../interfaces/newPlant.interface';
+import { AllAlertsResponse } from '../interfaces/allAlerts-response.interface';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +36,26 @@ export class PlantServiceService {
       alertsToAdd
     );
   }
-  
+  getTypesBySeverity(id: string): Observable<TypesBySeverity> {
+    return this.http.get<TypesBySeverity>(
+      `${this.baseUrl}/alerts/severity/${id}`
+    );
+  }
+
+  getAllAlerts(): Observable<AllAlertsResponse> {
+    return this.http.get<AllAlertsResponse>(`${this.baseUrl}/plants/alerts`);
+  }
+
+  deletePlant(id: string): Observable<boolean> {
+    return this.http.delete(`${this.baseUrl}/plants/${id}`).pipe(
+      catchError((err) => {
+        console.log('Hubo un error al eliminar la planta', err);
+        return of(false);
+      }),
+      map((resp) => {
+        console.log('Respuesta del servidor:', resp);
+        return true;
+      })
+    );
+  }
 }

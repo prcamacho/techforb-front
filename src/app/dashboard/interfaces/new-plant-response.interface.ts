@@ -1,4 +1,4 @@
-export interface NewPlant {
+export interface NewPlantResponse {
   id: number;
   name: string;
   country: string;
