@@ -12,6 +12,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth-service.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -29,6 +31,7 @@ import { AuthService } from '../../services/auth-service.service';
 })
 export class LoginPageComponent {
   private authService = inject(AuthService);
+  private router = inject(Router);
   logForm: FormGroup;
 
   constructor() {
@@ -43,8 +46,11 @@ export class LoginPageComponent {
 
   login() {
     const { email, password } = this.logForm.value;
-    this.authService.login(email, password).subscribe((success) => {
-      console.log(success);
+    this.authService.login(email, password).subscribe({
+      next: () => this.router.navigateByUrl('/dashboard'),
+      error: (message) => {
+        Swal.fire('Error', message, 'error');
+      },
     });
   }
 }
