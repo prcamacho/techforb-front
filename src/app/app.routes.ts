@@ -4,11 +4,13 @@ import { LoginPageComponent } from './auth/pages/login-page/login-page.component
 import { RegisterPageComponent } from './auth/pages/register-page/register-page.component';
 import { DashboardLayoutComponent } from './dashboard/layout/dashboard-layout/dashboard-layout.component';
 import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
+import { isNotAuthenticatedGuard } from './auth/guards/is-not-authenticated.guard';
 
 export const routes: Routes = [
   {
     //TODO: Redirigir auth a dashboard y si no esta logueado, a login
     path: 'auth',
+    canActivate: [isNotAuthenticatedGuard],
     loadComponent: () =>
       import('./auth/layout/auth-layout/auth-layout.component').then(
         (c) => c.AuthLayoutComponent

@@ -72,4 +72,10 @@ export class AuthService {
       })
     );
   }
+
+  logout() {
+    this.cookieService.delete('token');
+    this._currentUser.set(null);
+    this._authStatus.set(AuthStatus.notAuthenticated);
+  }
 }
