@@ -10,23 +10,14 @@ import { PopupEditPlantComponent } from '../../layout/popup-edit-plant/popup-edi
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { AllAlertsResponse, SeverityCounts } from '../../interfaces/allAlerts-response.interface';
+import {
+  AllAlertsResponse,
+  SeverityCounts,
+} from '../../interfaces/allAlerts-response.interface';
 import { PlantServiceService } from '../../services/plant-service.service';
 import { CountryServiceService } from '../../services/country-service.service';
 import { CountryRegionResponse } from '../../interfaces/country-region-response.interface';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  // Agrega más elementos aquí
-];
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-severity-by-plant',
@@ -44,7 +35,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './severity-by-plant.component.html',
   styleUrl: './severity-by-plant.component.css',
 })
-export class SeverityByPclantComponent implements OnInit{
+export class SeverityByPclantComponent implements OnInit {
   countries: CountryRegionResponse[] = [];
   displayedColumns: string[] = [
     'pais',
@@ -59,7 +50,11 @@ export class SeverityByPclantComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog,private plantService: PlantServiceService,private countryService: CountryServiceService) {}
+  constructor(
+    private dialog: MatDialog,
+    private plantService: PlantServiceService,
+    private countryService: CountryServiceService
+  ) {}
 
   ngOnInit() {
     this.plantService.getAllAlerts().subscribe((data: AllAlertsResponse[]) => {
@@ -68,16 +63,17 @@ export class SeverityByPclantComponent implements OnInit{
       this.dataSource.sort = this.sort;
     });
 
-    this.countryService.getCountryByRegion().subscribe((data: CountryRegionResponse[]) => {
-      this.countries = data;
-    });
+    this.countryService
+      .getCountryByRegion()
+      .subscribe((data: CountryRegionResponse[]) => {
+        this.countries = data;
+      });
   }
 
   getFlag(countryName: string): string {
-    const country = this.countries.find(c => c.name.common === countryName);
+    const country = this.countries.find((c) => c.name.common === countryName);
     return country ? country.flags.png : '';
   }
-  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -101,7 +97,6 @@ export class SeverityByPclantComponent implements OnInit{
     this.plantService.getAllAlerts().subscribe((data: AllAlertsResponse[]) => {
       this.dataSource.data = data;
     });
-  
   }
 
   editPlant(plant: any) {
@@ -111,7 +106,7 @@ export class SeverityByPclantComponent implements OnInit{
       height: 'auto',
       data: {
         name: plant.name,
-        country: plant.country
+        country: plant.country,
       },
     });
 
@@ -119,5 +114,19 @@ export class SeverityByPclantComponent implements OnInit{
       console.log(result);
     });
   }
-}
 
+  deletePlant(name: string) {
+    this.plantService.deletePlant(name).subscribe({
+      next: (response) => {
+        Swal.fire(
+          'Éxito',
+          'La planta se ha eliminado correctamente',
+          'success'
+        );
+      },
+      error: (message) => {
+        Swal.fire('Error', message, 'error');
+      },
+    });
+  }
+}
