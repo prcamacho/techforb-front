@@ -1,44 +1,52 @@
 <div class="container">
+  <div class="title-container">
+    <h4>Editar planta</h4>
+    <hr />
+  </div>
+  <button mat-icon-button (click)="onClose()" class="button-close">
+    <mat-icon>clear</mat-icon>
+  </button>
 
-    <div class="title-container">
-        <h4>Editar planta</h4>
-        <hr>
-    </div>
-    <button mat-icon-button (click)="onClose()" class="button-close">
-        <mat-icon>clear</mat-icon>
-    </button>
-
-    <form action="" class="form-edit">
-        <mat-form-field appearance="outline" class="field-form">
-            <mat-label>Nombre planta</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="field-form">
-            <mat-label>Pais</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="field-form">
-            <mat-label>Cantidad de lecturas</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="field-form">
-            <mat-label>Cantidad de lecturas</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="field-form">
-            <mat-label>Alerta medias</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="field-form">
-            <mat-label>Alertas rojas</mat-label>
-            <input matInput>
-        </mat-form-field>
-        
-    </form>
-
+  <form
+    [formGroup]="newAlertsForm"
+    autocomplete="off"
+    action=""
+    class="form-edit"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field appearance="outline" class="field-form">
+      <mat-label>Nombre planta</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="field-form">
+      <mat-label>Pais</mat-label>
+      <input matInput formControlName="country" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="field-form">
+      <mat-label>Cantidad de lecturas ok</mat-label>
+      <input matInput formControlName="okAlerts" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="field-form">
+      <mat-label>Cantidad de lecturas</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="field-form">
+      <mat-label>Alerta medias</mat-label>
+      <input matInput formControlName="mediumAlerts" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="field-form">
+      <mat-label>Alertas rojas</mat-label>
+      <input matInput formControlName="redAlerts" />
+    </mat-form-field>
     <div class="container-buttons">
-        <button mat-flat-button>Cancelar</button>
-        <button mat-flat-button class="button-acept">Crear</button>
+      <button
+        mat-flat-button
+        [disabled]="newAlertsForm.invalid"
+        type="submit"
+        class="button-acept"
+      >
+        Editar
+      </button>
     </div>
+  </form>
 </div>
-

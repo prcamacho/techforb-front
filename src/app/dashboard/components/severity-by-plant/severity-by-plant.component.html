@@ -62,7 +62,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item (click)="editPlant(element)">
+          <button mat-menu-item (click)="editPlant({name: element.name, country: element.country})">
             <span>Editar</span>
           </button>
           <button mat-menu-item>

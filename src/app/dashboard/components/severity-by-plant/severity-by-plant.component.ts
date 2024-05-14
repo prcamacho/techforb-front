@@ -109,7 +109,10 @@ export class SeverityByPclantComponent implements OnInit{
       maxWidth: '600%',
       width: '600px',
       height: 'auto',
-      data: plant,
+      data: {
+        name: plant.name,
+        country: plant.country
+      },
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
