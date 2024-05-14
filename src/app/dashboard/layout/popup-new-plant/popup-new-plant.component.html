@@ -1,1 +1,29 @@
-<p>popup-new-plant works!</p>
+<div class="container">
+
+    <div class="title-container">
+        <h4>Crear nueva planta</h4>
+        <hr>
+    </div>
+    <button mat-icon-button (click)="onClose()" class="button-close">
+        <mat-icon>clear</mat-icon>
+    </button>
+
+    <form action="" class="form-create">
+        <mat-form-field appearance="outline" class="field-form">
+            <mat-label>Nueva planta</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="field-form">
+            <mat-label>Select</mat-label>
+            <mat-select>
+                <mat-option value="one">First option</mat-option>
+                <mat-option value="two">Second option</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+    <div class="container-buttons">
+        <button mat-flat-button>Cancelar</button>
+        <button mat-flat-button class="button-acept">Crear</button>
+    </div>
+</div>

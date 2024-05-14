@@ -1,0 +1,45 @@
+.container {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    gap: 20px;
+}
+
+.button-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.container-title {
+    width: 100%;
+}
+
+hr {
+    color: gray;
+}
+
+.form-edit {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.field-form {
+    width: 100%;
+}
+
+.container-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 20px;
+}
+
+@media (max-width: 480px) {
+    .form-edit {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

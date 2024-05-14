@@ -1,1 +1,44 @@
-<p>popup-edit-plant works!</p>
+<div class="container">
+
+    <div class="title-container">
+        <h4>Editar planta</h4>
+        <hr>
+    </div>
+    <button mat-icon-button (click)="onClose()" class="button-close">
+        <mat-icon>clear</mat-icon>
+    </button>
+
+    <form action="" class="form-edit">
+        <mat-form-field appearance="outline" class="field-form">
+            <mat-label>Nombre planta</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="field-form">
+            <mat-label>Pais</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="field-form">
+            <mat-label>Cantidad de lecturas</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="field-form">
+            <mat-label>Cantidad de lecturas</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="field-form">
+            <mat-label>Alerta medias</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="field-form">
+            <mat-label>Alertas rojas</mat-label>
+            <input matInput>
+        </mat-form-field>
+        
+    </form>
+
+    <div class="container-buttons">
+        <button mat-flat-button>Cancelar</button>
+        <button mat-flat-button class="button-acept">Crear</button>
+    </div>
+</div>
+

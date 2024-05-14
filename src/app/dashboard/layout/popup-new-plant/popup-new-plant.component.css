@@ -1,0 +1,40 @@
+.container{
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    gap: 20px;
+}
+
+.button-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.container-title{
+    width: 100%;
+}
+
+hr{
+    color: gray;
+}
+
+.form-create{
+    width: 100%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.field-form{
+    width: 100%;
+}
+
+.container-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 20px;
+}
