@@ -42,8 +42,8 @@ export class PlantServiceService {
     );
   }
 
-  getAllAlerts(): Observable<AllAlertsResponse> {
-    return this.http.get<AllAlertsResponse>(`${this.baseUrl}/plants/alerts`);
+  getAllAlerts(): Observable<AllAlertsResponse[]> {
+    return this.http.get<AllAlertsResponse[]>(`${this.baseUrl}/plants/alerts`);
   }
 
   deletePlant(id: string): Observable<boolean> {

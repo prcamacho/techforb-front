@@ -10,6 +10,8 @@ import { PopupEditPlantComponent } from '../../layout/popup-edit-plant/popup-edi
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { AllAlertsResponse, SeverityCounts } from '../../interfaces/allAlerts-response.interface';
+import { PlantServiceService } from '../../services/plant-service.service';
 
 export interface PeriodicElement {
   name: string;
@@ -41,7 +43,37 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrl: './severity-by-plant.component.css',
 })
 export class SeverityByPclantComponent {
-  constructor(private dialog: MatDialog) {}
+  displayedColumns: string[] = [
+    'pais',
+    'nombre_de_la_planta',
+    'lecturas',
+    'alertas_medias',
+    'alertas_rojas',
+    'acciones',
+  ];
+  dataSource: MatTableDataSource<AllAlertsResponse> = new MatTableDataSource();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private dialog: MatDialog,private plantService: PlantServiceService) {}
+
+  ngOnInit() {
+    this.plantService.getAllAlerts().subscribe((data: AllAlertsResponse[]) => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   createPlant() {
     const dialogRef = this.dialog.open(PopupNewPlantComponent, {
@@ -67,31 +99,5 @@ export class SeverityByPclantComponent {
       console.log(result);
     });
   }
-
-  displayedColumns: string[] = [
-    'pais',
-    'nombre_de_la_planta',
-    'lecturas',
-    'alertas_medias',
-    'alertas_rojas',
-    'acciones',
-  ];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
 }
+
