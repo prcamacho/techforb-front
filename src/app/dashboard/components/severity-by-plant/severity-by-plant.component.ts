@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { AllAlertsResponse, SeverityCounts } from '../../interfaces/allAlerts-response.interface';
 import { PlantServiceService } from '../../services/plant-service.service';
+import { CountryServiceService } from '../../services/country-service.service';
+import { CountryRegionResponse } from '../../interfaces/country-region-response.interface';
 
 export interface PeriodicElement {
   name: string;
@@ -42,7 +44,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './severity-by-plant.component.html',
   styleUrl: './severity-by-plant.component.css',
 })
-export class SeverityByPclantComponent {
+export class SeverityByPclantComponent implements OnInit{
+  countries: CountryRegionResponse[] = [];
   displayedColumns: string[] = [
     'pais',
     'nombre_de_la_planta',
@@ -56,7 +59,7 @@ export class SeverityByPclantComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog,private plantService: PlantServiceService) {}
+  constructor(private dialog: MatDialog,private plantService: PlantServiceService,private countryService: CountryServiceService) {}
 
   ngOnInit() {
     this.plantService.getAllAlerts().subscribe((data: AllAlertsResponse[]) => {
@@ -64,7 +67,17 @@ export class SeverityByPclantComponent {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+
+    this.countryService.getCountryByRegion().subscribe((data: CountryRegionResponse[]) => {
+      this.countries = data;
+    });
   }
+
+  getFlag(countryName: string): string {
+    const country = this.countries.find(c => c.name.common === countryName);
+    return country ? country.flags.png : '';
+  }
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -85,6 +98,10 @@ export class SeverityByPclantComponent {
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log(result);
     });
+    this.plantService.getAllAlerts().subscribe((data: AllAlertsResponse[]) => {
+      this.dataSource.data = data;
+    });
+  
   }
 
   editPlant(plant: any) {

@@ -1,29 +1,47 @@
 <div class="container">
+  <div class="title-container">
+    <h4>Crear nueva planta</h4>
+    <hr />
+  </div>
+  <button mat-icon-button (click)="onClose()" class="button-close">
+    <mat-icon>clear</mat-icon>
+  </button>
 
-    <div class="title-container">
-        <h4>Crear nueva planta</h4>
-        <hr>
-    </div>
-    <button mat-icon-button (click)="onClose()" class="button-close">
-        <mat-icon>clear</mat-icon>
-    </button>
-
-    <form action="" class="form-create">
-        <mat-form-field appearance="outline" class="field-form">
-            <mat-label>Nueva planta</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="field-form">
-            <mat-label>Select</mat-label>
-            <mat-select>
-                <mat-option value="one">First option</mat-option>
-                <mat-option value="two">Second option</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </form>
-
+  <form
+    [formGroup]="newPlantForm"
+    autocomplete="off"
+    (ngSubmit)="createNewPlant()"
+    action=""
+    class="form-create"
+  >
+    <mat-form-field appearance="outline" class="field-form">
+      <mat-label>Nueva planta</mat-label>
+      <input matInput formControlName="name" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="field-form">
+      <mat-label>Select</mat-label>
+      <mat-select formControlName="country">
+        @for (country of countries; track $index) {<mat-option
+          [value]="country.name.common"
+        >
+          <img
+            [src]="country.flags.png"
+            alt="{{ country.name.common }} flag"
+            width="20"
+          />
+          {{ country.name.common }} </mat-option
+        >}
+      </mat-select>
+    </mat-form-field>
     <div class="container-buttons">
-        <button mat-flat-button>Cancelar</button>
-        <button mat-flat-button class="button-acept">Crear</button>
+      <button
+        mat-flat-button
+        [disabled]="newPlantForm.invalid"
+        type="submit"
+        class="button-acept"
+      >
+        Crear
+      </button>
     </div>
+  </form>
 </div>
