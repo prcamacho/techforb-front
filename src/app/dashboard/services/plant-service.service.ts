@@ -36,8 +36,8 @@ export class PlantServiceService {
       alertsToAdd
     );
   }
-  getCountBySeverity(id: string): Observable<CountBySeverity> {
-    return this.http.get<CountBySeverity>(
+  getCountBySeverity(id: string): Observable<any> {
+    return this.http.get<any>(
       `${this.baseUrl}/alerts/severity/${id}`
     );
   }

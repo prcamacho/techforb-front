@@ -21,20 +21,20 @@ export class SeverityLecturesComponent implements OnInit {
   ngOnInit(): void {
     this.plantService
       .getCountBySeverity('ok')
-      .subscribe((data: CountBySeverity) => {
-        this.okAlerts = data.count;
+      .subscribe((data: any) => {
+        this.okAlerts = data.length;
       });
 
     this.plantService
       .getCountBySeverity('media')
-      .subscribe((data: CountBySeverity) => {
-        this.mediumAlerts = data.count;
+      .subscribe((data: any) => {
+        this.mediumAlerts = data.length;
       });
 
     this.plantService
       .getCountBySeverity('roja')
-      .subscribe((data: CountBySeverity) => {
-        this.redAlerts = data.count;
+      .subscribe((data: any) => {
+        this.redAlerts = data.length;
       });
   }
 }
